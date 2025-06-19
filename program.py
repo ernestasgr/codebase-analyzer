@@ -1,3 +1,4 @@
+import argparse
 import os
 import subprocess
 from collections import defaultdict
@@ -162,7 +163,18 @@ class CodebaseAnalyzer:
 
 
 def main():
-    analyzer = CodebaseAnalyzer()
+    parser = argparse.ArgumentParser(
+        description="Analyze a codebase by language and line count."
+    )
+    parser.add_argument(
+        "path",
+        nargs="?",
+        default=".",
+        help="Path to the root of the codebase (default: current directory)",
+    )
+    args = parser.parse_args()
+
+    analyzer = CodebaseAnalyzer(root_dir=args.path)
     analyzer.analyze()
     analyzer.report()
 
