@@ -151,6 +151,7 @@ class CodebaseAnalyzer:
 
     def report(self) -> None:
         """Print a summary report sorted by total lines descending."""
+        total = 0
         for lang, total_lines in sorted(
             self.line_counts.items(), key=lambda x: x[1], reverse=True
         ):
@@ -160,6 +161,10 @@ class CodebaseAnalyzer:
             ):
                 print(f"  {lines:6} lines  {filepath}")
             print()
+            total += total_lines
+
+        print("=" * 40)
+        print(f"{'Total':15} {total} lines")
 
 
 def main():
