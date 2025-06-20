@@ -174,7 +174,9 @@ def main():
     )
     args = parser.parse_args()
 
-    analyzer = CodebaseAnalyzer(root_dir=args.path)
+    os.chdir(args.path)
+
+    analyzer = CodebaseAnalyzer(".")
     analyzer.analyze()
     analyzer.report()
 
